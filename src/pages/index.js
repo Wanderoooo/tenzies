@@ -1,6 +1,6 @@
 import { Inter } from 'next/font/google'
 import TenziesBoard from '../components/TenziesBoard'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { nanoid } from "nanoid";
 import NumButton from '@/components/NumButton';
 
@@ -8,7 +8,24 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
+
+  const [tenzies, setTenzies] = useState(() => false)
   const [numbers, setNumbers] = useState(() => allNewDice())
+
+  useEffect(() => {
+    let win = true;
+    const firstElement = numbers[0].value
+
+    for (let i = 0; i < numbers.length; i++) {
+      if (numbers[i].value !== firstElement) {
+        win = false
+        return
+      }
+    }
+
+    setTenzies(win)
+
+    }, [numbers])
 
   function allNewDice() {
     const diceArray = []
@@ -67,7 +84,7 @@ export default function Home() {
 
   return (
     <main className="w-bigr h-bigr bg-white rounded-2xl m-20 flex justify-center items-center">
-      <TenziesBoard children={children} handleRoll={handleRoll} />
+      <TenziesBoard children={children} handleRoll={handleRoll} isWin={tenzies}/>
     </main>
   )
 }
