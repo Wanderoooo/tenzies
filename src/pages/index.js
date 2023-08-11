@@ -59,6 +59,10 @@ export default function Home() {
   })
 
   function handleRoll() {
+    if (tenzies) {
+      setTenzies(false)
+      setNumbers(allNewDice())
+    }
 
     setNumbers(prevNum => {
       let updatedArray = []

@@ -23,7 +23,7 @@ export default function TenziesBoard(props) {
       </section>}
       </section>
       <NumBar children={props.children}/>
-      <button type="button" className="w-36 bg-blue-400 h-12 rounded-md m-3" onClick={props.handleRoll}><strong>Roll</strong></button>
+      <button type="button" className="w-36 bg-blue-400 h-12 rounded-md m-3" onClick={props.handleRoll}><strong>{props.isWin ? "New Game" : "Roll"}</strong></button>
     </div>
   )
 }
